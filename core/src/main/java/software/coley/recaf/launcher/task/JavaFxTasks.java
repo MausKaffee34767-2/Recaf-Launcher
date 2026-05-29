@@ -1,10 +1,8 @@
 package software.coley.recaf.launcher.task;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.JsonValue;
 import org.json.XML;
+import org.json.JSONObject;
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import software.coley.recaf.launcher.info.ArchitectureType;
 import software.coley.recaf.launcher.info.JavaFxPlatform;
@@ -54,9 +52,8 @@ public class JavaFxTasks {
 		JavaFxTasks.JFX_SUPPORTED_JDK_MAP.put(23, 21); // JavaFX 23 requires Java 21 or higher
 
 		// Starting from JavaFX 25, an N-2 approach has been taken with Java version support
-		//  for (int i = 25; i < 100; i++)
-		//  	JavaFxTasks.JFX_SUPPORTED_JDK_MAP.put(i, i - 2);
-		JavaFxTasks.JFX_SUPPORTED_JDK_MAP.put(25, 99999); // Temporary hack, JavaFX 25+ is incompatible with RichTextFX
+		for (int i = 25; i < 100; i++)
+		    JavaFxTasks.JFX_SUPPORTED_JDK_MAP.put(i, i - 2);
 	}
 
 	/**
@@ -146,22 +143,25 @@ public class JavaFxTasks {
 		try {
 			String metadataXml = Web.getText(JFX_METADATA);
 			String metadataJson = XML.toJSONObject(metadataXml).toString();
-			JsonObject metadata = Json.parse(metadataJson).asObject();
-			JsonObject versioning = metadata.get("metadata").asObject().get("versioning").asObject();
-			JsonArray versions = versioning.get("versions").asObject().get("version").asArray();
+			JSONObject metadata = new JSONObject(metadataJson);
+			JSONObject versioning = metadata.getJSONObject("metadata").getJSONObject("versioning");
+			JSONArray versions = versioning.getJSONObject("versions").getJSONArray("version");
 
 			// Newer versions are last in the array.
-			for (int i = versions.size() - 1; i > 0; i--) {
+			for (int i = versions.length() - 1; i > 0; i--) {
 				// The XML scheme handling in this json library is... kinda annoying.
 				//   <version>11.0.1</version ---> String
 				//   <version>11</version ---> int
 				// It doesn't enforce a flat type for the repeated elements.
 				String versionString;
-				JsonValue version = versions.get(i);
-				if (version.isString())
-					versionString = version.asString();
-				else if (version.isNumber())
-					versionString = String.valueOf(version.asInt());
+				Object version = versions.get(i);
+//debug code begin
+                logger.info("version: {}", String.valueOf(version));
+//debug code end
+				if (version instanceof String)
+					versionString = (String) version;
+				else if (version instanceof Integer)
+					versionString = String.valueOf((int) version);
 				else
 					versionString = String.valueOf(JavaFxVersion.MIN_SUGGESTED_JFX_VERSION); // Fallback.
 

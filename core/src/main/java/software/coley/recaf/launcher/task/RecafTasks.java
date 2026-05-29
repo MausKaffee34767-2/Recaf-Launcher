@@ -1,9 +1,7 @@
 package software.coley.recaf.launcher.task;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonArray;
-import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.JsonValue;
+import org.json.JSONObject;
+import org.json.JSONArray;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
@@ -133,32 +131,32 @@ public class RecafTasks {
 		}
 
 		// Get release JSON model from GitHub
-		JsonObject latestRelease;
+		JSONObject latestRelease;
 		try {
-			String latestReleaseJson = Web.getText(LATEST_RELEASE);
-			latestRelease = Json.parse(latestReleaseJson).asObject();
+			String latestReleaseJSON = Web.getText(LATEST_RELEASE);
+			latestRelease = new JSONObject(latestReleaseJSON);
 		} catch (IOException ex) {
 			return new VersionUpdateResult(installedVersion, null, VersionUpdateStatusType.FAILED_TO_FETCH)
 					.withError(ex);
 		}
 
 		// Check if latest release tag (version) is newer than the current one.
-		String latestTag = latestRelease.getString("tag_name", "0.0.0");
+		String latestTag = latestRelease.optString("tag_name", "0.0.0");
 		RecafVersion latestVersion = new RecafVersion(latestTag, -1);
 		if (installedVersion != null && !latestVersion.isNewer(installedVersion)) {
 			return new VersionUpdateResult(installedVersion, latestVersion, VersionUpdateStatusType.UP_TO_DATE);
 		}
 
-		JsonArray assets = latestRelease.get("assets").asArray();
-		for (JsonValue assetValue : assets) {
-			JsonObject asset = assetValue.asObject();
-			String name = asset.getString("name", "").toLowerCase();
+		JSONArray assets = latestRelease.getJSONArray("assets");
+		for (Object assetValue : assets) {
+			JSONObject asset = (JSONObject) assetValue;
+			String name = asset.optString("name", "").toLowerCase();
 
 			// Get the first asset that indicates a fat-jar
 			if (name.endsWith("-all.jar") || name.endsWith("-jar-with-dependencies.jar")) {
 				Path recafJar = CommonPaths.getRecafJar();
 				Path recafJarTemp = CommonPaths.getRecafTempJar();
-				String downloadUrl = asset.getString("browser_download_url", null);
+				String downloadUrl = asset.optString("browser_download_url", null);
 				try {
 					if (downloadListener != null) downloadListener.init(downloadUrl);
 					byte[] download = Web.getBytes(downloadUrl, downloadListener);
@@ -214,40 +212,40 @@ public class RecafTasks {
 		try {
 			// Get artifacts.
 			// They appear in sorted order by time.
-			String artifactsJson = Web.getText("https://api.github.com/repos/Col-E/Recaf/actions/artifacts");
-			JsonObject artifacts = Json.parse(artifactsJson).asObject();
-			JsonArray listing = artifacts.get("artifacts").asArray();
-			for (JsonValue artifactValue : listing) {
-				JsonObject artifact = artifactValue.asObject();
+			String artifactsJSON = Web.getText("https://api.github.com/repos/Col-E/Recaf/actions/artifacts");
+			JSONObject artifacts = new JSONObject(artifactsJSON);
+			JSONArray listing = artifacts.getJSONArray("artifacts");
+			for (Object artifactValue : listing) {
+				JSONObject artifact = (JSONObject)artifactValue;
 
 				// Skip expired artifacts
-				boolean expired = artifact.getBoolean("expired", false);
+				boolean expired = artifact.optBoolean("expired", false);
 				if (expired)
 					continue;
 
 				// Skip non snapshot builds
-				String name = artifact.getString("name", "?");
+				String name = artifact.optString("name", "?");
 				if (!name.equals("snapshot-build"))
 					continue;
 
 				// Skip branches if predicate is given
-				JsonObject workflowRun = artifact.get("workflow_run").asObject();
+				JSONObject workflowRun = artifact.getJSONObject("workflow_run");
 				if (branchMatcher == null)
 					continue;
-				String branch = workflowRun.getString("head_branch", "?");
+				String branch = workflowRun.optString("head_branch", "?");
 				if (!branchMatcher.test(branch))
 					continue;
 
 				// Skip if the repository isn't Col-E/Recaf
-				int repositoryId = workflowRun.getInt("repository_id", 0);
+				int repositoryId = workflowRun.optInt("repository_id", 0);
 				if (repositoryId != RECAF_REPO_ID)
 					continue;
-				int headRepositoryId = workflowRun.getInt("head_repository_id", -1);
+				int headRepositoryId = workflowRun.optInt("head_repository_id", -1);
 				if (headRepositoryId != RECAF_REPO_ID)
 					continue;
 
 				// Size sanity check
-				long size = artifact.getLong("size_in_bytes", -1);
+				long size = artifact.optLong("size_in_bytes", -1);
 				if (size <= 0)
 					continue;
 
@@ -255,7 +253,7 @@ public class RecafTasks {
 				// including an access token... which, I'm not going to do.
 				// You also cannot reconstruct the URL: https://github.com/Col-E/Recaf/suites/<check_suite_id>/artifacts/<artifact_id>
 				// as that is also locked behind requiring an account or access token.
-				long workflowRunId = workflowRun.getLong("id", -1);
+				long workflowRunId = workflowRun.optLong("id", -1);
 
 				// Compare to what we have locally installed. We can skip updating if the ids match.
 				Path snapshotWorkflowFile = CommonPaths.getSnapshotWorkflowFile();

@@ -1,8 +1,7 @@
 package software.coley.recaf.launcher.config;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
-import com.eclipsesource.json.JsonValue;
+import org.json.JSONTokener;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import software.coley.recaf.launcher.info.JavaInstall;
 import software.coley.recaf.launcher.task.JavaEnvTasks;
@@ -36,11 +35,11 @@ public class Config {
 			isFirst = false;
 			try {
 				String content = new String(Files.readAllBytes(configFile), StandardCharsets.UTF_8);
-				JsonValue parsed = Json.parse(content);
-				if (parsed instanceof JsonObject) {
-					JsonObject root = (JsonObject) parsed;
-					String action = root.getString("action", null);
-					String java = root.getString("java", null);
+				Object parsed = new JSONTokener(content).nextValue();
+				if (parsed instanceof JSONObject) {
+					JSONObject root = (JSONObject) parsed;
+					String action = root.optString("action", null);
+					String java = root.optString("java", null);
 					if (action != null) {
 						try {
 							launchAction = LaunchAction.valueOf(action);
@@ -67,11 +66,11 @@ public class Config {
 	 * Write config to storage.
 	 */
 	private void persist() {
-		JsonObject root = Json.object();
+		JSONObject root = new JSONObject();
 		if (launchAction != null)
-			root.set("action", launchAction.name());
+			root.put("action", launchAction.name());
 		if (javaInstall != null)
-			root.set("java", javaInstall.getJavaExecutable().toString());
+			root.put("java", javaInstall.getJavaExecutable().toString());
 		try {
 			Path configFile = CommonPaths.getGuiConfigFile();
 			Path parentDir = configFile.getParent();
