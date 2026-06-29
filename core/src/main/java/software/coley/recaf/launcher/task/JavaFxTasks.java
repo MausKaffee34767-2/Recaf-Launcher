@@ -155,9 +155,6 @@ public class JavaFxTasks {
 				// It doesn't enforce a flat type for the repeated elements.
 				String versionString;
 				Object version = versions.get(i);
-//debug code begin
-                logger.info("version: {}", String.valueOf(version));
-//debug code end
 				if (version instanceof String)
 					versionString = (String) version;
 				else if (version instanceof Integer)
