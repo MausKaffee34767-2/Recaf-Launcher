@@ -10,8 +10,8 @@ import software.coley.recaf.launcher.util.CommonPaths;
 import software.coley.recaf.launcher.util.Loggers;
 import software.coley.recaf.launcher.util.StreamGobbler;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -58,7 +58,7 @@ public class ExecutionTasks {
 	 * @throws IOException
 	 * 		When the process couldn't be launched.
 	 */
-	@Nonnull
+	@NonNull
 	public static RunResult run(boolean inheritIO, boolean cliContext, @Nullable String javaExecutablePath) throws IOException {
 		Path recafDirectory = CommonPaths.getRecafDirectory();
 		logger.debug("Looking in '{}' for Recaf/dependencies...", recafDirectory);
@@ -241,7 +241,7 @@ public class ExecutionTasks {
 			this.err = "";
 		}
 
-		public RunResult(int code, @Nonnull StringBuilder out, @Nonnull StringBuilder err) {
+		public RunResult(int code, @NonNull StringBuilder out, @NonNull StringBuilder err) {
 			this.code = code;
 			this.out = out.toString();
 			this.err = err.toString();
@@ -251,12 +251,12 @@ public class ExecutionTasks {
 			return code;
 		}
 
-		@Nonnull
+		@NonNull
 		public String getOut() {
 			return out;
 		}
 
-		@Nonnull
+		@NonNull
 		public String getErr() {
 			return err;
 		}
@@ -265,7 +265,7 @@ public class ExecutionTasks {
 			return code == SUCCESS;
 		}
 
-		@Nonnull
+		@NonNull
 		public String getCodeDescription() {
 			switch (code) {
 				case ERR_NOT_INSTALLED:

@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -26,7 +26,7 @@ public class ResettableDelayTask {
 	 * @param unit
 	 * 		Delay amount time units.
 	 */
-	public ResettableDelayTask(@Nonnull String name, @Nonnull Runnable task, long delay, @Nonnull TimeUnit unit) {
+	public ResettableDelayTask(@NonNull String name, @NonNull Runnable task, long delay, @NonNull TimeUnit unit) {
 		this.task = task;
 		this.delay = delay;
 		this.unit = unit;

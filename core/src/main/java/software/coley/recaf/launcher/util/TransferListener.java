@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Listener for IO transfer operations.
@@ -14,7 +14,7 @@ public interface TransferListener {
 	 *
 	 * @param name Name of transfer.
 	 */
-	default void init(@Nonnull String name) {}
+	default void init(@NonNull String name) {}
 
 	/**
 	 * Called when the transfer begins.

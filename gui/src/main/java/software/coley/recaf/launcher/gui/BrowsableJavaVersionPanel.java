@@ -8,7 +8,7 @@ import software.coley.recaf.launcher.info.PlatformType;
 import software.coley.recaf.launcher.task.JavaEnvTasks;
 import software.coley.recaf.launcher.util.SymLinks;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -35,10 +35,10 @@ import java.util.concurrent.CompletableFuture;
 public abstract class BrowsableJavaVersionPanel extends JPanel {
 	private static String lastJavaInstallSelectionDir;
 
-	@Nonnull
+	@NonNull
 	protected abstract JButton getBrowseButton();
 
-	@Nonnull
+	@NonNull
 	protected abstract JComboBox<JavaInstall> getInstallCombo();
 
 	/**
@@ -146,7 +146,7 @@ public abstract class BrowsableJavaVersionPanel extends JPanel {
 	 *
 	 * @return Future of repopulation. Ends when UI is updated.
 	 */
-	@Nonnull
+	@NonNull
 	protected CompletableFuture<?> repopulateInstallModel(boolean doScan) {
 		return CompletableFuture.supplyAsync(() -> {
 			// Scan for installs

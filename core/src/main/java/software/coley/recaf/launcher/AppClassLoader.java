@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -14,7 +14,7 @@ final class AppClassLoader extends URLClassLoader {
 		ClassLoader.registerAsParallelCapable();
 	}
 
-	AppClassLoader(@Nonnull URL[] urls, @Nonnull ClassLoader parent) {
+	AppClassLoader(@NonNull URL[] urls, @NonNull ClassLoader parent) {
 		super(urls, parent);
 	}
 

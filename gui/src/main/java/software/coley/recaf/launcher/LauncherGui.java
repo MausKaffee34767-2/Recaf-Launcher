@@ -20,7 +20,8 @@ import software.coley.recaf.launcher.task.error.InvalidInstallationException;
 import software.coley.recaf.launcher.util.CommonPaths;
 import software.coley.recaf.launcher.util.Loggers;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
+
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -221,7 +222,7 @@ public class LauncherGui {
 	 * @param update
 	 *        {@code true} when the user indicated they have opted to update Recaf.
 	 */
-	public static void launch(@Nonnull LauncherFeedback feedback, boolean update) {
+	public static void launch(@NonNull LauncherFeedback feedback, boolean update) {
 		// Handle updating, even in cases where the user did not opt to update but one is required.
 		if (update || recafRequiresUpdate()) {
 			feedback.updateLaunchProgressMessage("Updating Recaf...");
@@ -317,7 +318,7 @@ public class LauncherGui {
 	 * @param feedback
 	 * 		Feedback mechanism for update progress.
 	 */
-	public static void updateRecaf(@Nonnull LauncherFeedback feedback) {
+	public static void updateRecaf(@NonNull LauncherFeedback feedback) {
 		RecafTasks.setDownloadListener(feedback.provideRecafDownloadListener());
 
 		// Update from snapshots
@@ -347,7 +348,7 @@ public class LauncherGui {
 	 * @param javaVersion
 	 * 		Version of Java to use for compatibility filtering.
 	 */
-	public static void updateJavafx(@Nonnull LauncherFeedback feedback, int javaVersion) {
+	public static void updateJavafx(@NonNull LauncherFeedback feedback, int javaVersion) {
 		JavaFxTasks.setDownloadListener(feedback.provideJavaFxDownloadListener());
 
 		// Clean the slate by clearing the cache
@@ -416,7 +417,7 @@ public class LauncherGui {
 	 *
 	 * @return {@code true} when the jar roughly passes basic integrity checking.
 	 */
-	private static boolean isInvalidJar(@Nonnull Path path) {
+	private static boolean isInvalidJar(@NonNull Path path) {
 		if (!path.endsWith(".jar"))
 			return false;
 
@@ -442,7 +443,7 @@ public class LauncherGui {
 	 *
 	 * @author Romain Hippeau - https://stackoverflow.com/a/7434935/
 	 */
-	public static void setUIFont(@Nonnull FontUIResource resource) {
+	public static void setUIFont(@NonNull FontUIResource resource) {
 		Enumeration<?> keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
 			Object key = keys.nextElement();

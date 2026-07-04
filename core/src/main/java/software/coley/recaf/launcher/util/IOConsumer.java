@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 
 /**
@@ -17,5 +17,5 @@ public interface IOConsumer<T> {
 	 * @throws IOException
 	 * 		When the consumer handling fails.
 	 */
-	void accept(@Nonnull T value) throws IOException;
+	void accept(@NonNull T value) throws IOException;
 }

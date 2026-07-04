@@ -1,10 +1,9 @@
 package software.coley.recaf.launcher.util;
 
-
 import software.coley.recaf.launcher.info.PlatformType;
 import software.coley.recaf.launcher.info.SystemInformation;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class DesktopUtil {
 	/**
 	 * @return Screen dimensions.
 	 */
-	@Nonnull
+	@NonNull
 	public static Dimension getScreenSize() {
 		return screenSize;
 	}
@@ -38,7 +37,7 @@ public class DesktopUtil {
 	 * 		If the browser is not found, or it fails
 	 * 		to be launched.
 	 */
-	public static void showDocument(@Nonnull URI uri) throws IOException {
+	public static void showDocument(@NonNull URI uri) throws IOException {
 		final Runtime rt = Runtime.getRuntime();
 		switch (PlatformType.get()) {
 			case MAC:

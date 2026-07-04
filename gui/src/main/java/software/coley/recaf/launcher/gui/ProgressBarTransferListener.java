@@ -3,7 +3,7 @@ package software.coley.recaf.launcher.gui;
 import software.coley.recaf.launcher.util.StringUtil;
 import software.coley.recaf.launcher.util.TransferListener;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import javax.swing.JProgressBar;
 
 /**
@@ -19,7 +19,7 @@ public class ProgressBarTransferListener implements TransferListener {
 	 * @param progressBar
 	 * 		Bar to show transfer progress with.
 	 */
-	public ProgressBarTransferListener(int fallbackMax, @Nonnull JProgressBar progressBar) {
+	public ProgressBarTransferListener(int fallbackMax, @NonNull JProgressBar progressBar) {
 		this.progressBar = progressBar;
 		this.fallbackMax = fallbackMax;
 	}

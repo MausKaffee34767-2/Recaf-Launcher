@@ -1,7 +1,7 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,7 +33,7 @@ public class Stream {
 	 * @throws IOException
 	 * 		When the streams cannot be read or written to.
 	 */
-	public static void transfer(int bufferSize, @Nonnull InputStream input, @Nonnull OutputStream output) throws IOException {
+	public static void transfer(int bufferSize, @NonNull InputStream input, @NonNull OutputStream output) throws IOException {
 		transfer(bufferSize, input, output, -1, null);
 	}
 
@@ -52,7 +52,7 @@ public class Stream {
 	 * @throws IOException
 	 * 		When the streams cannot be read or written to.
 	 */
-	public static void transfer(int bufferSize, @Nonnull InputStream input, @Nonnull OutputStream output,
+	public static void transfer(int bufferSize, @NonNull InputStream input, @NonNull OutputStream output,
 	                            int max, @Nullable TransferListener listener) throws IOException {
 		if (listener != null) listener.start(max);
 		int read;

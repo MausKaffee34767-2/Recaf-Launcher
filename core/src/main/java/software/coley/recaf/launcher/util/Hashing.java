@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.DigestInputStream;
@@ -20,9 +20,9 @@ public class Hashing {
 	 * @throws IOException
 	 * 		When the input cannot be read.
 	 */
-	@Nonnull
+	@NonNull
 	@SuppressWarnings("all") // empty while
-	public static String sha1(@Nonnull InputStream is) throws IOException {
+	public static String sha1(@NonNull InputStream is) throws IOException {
 		MessageDigest digest;
 		try {
 			digest = MessageDigest.getInstance("SHA-1");
@@ -50,8 +50,8 @@ public class Hashing {
 	 *
 	 * @return Hex string representation of bytes. Chars are lower case.
 	 */
-	@Nonnull
-	private static String toHexString(@Nonnull byte[] bytes) {
+	@NonNull
+	private static String toHexString(@NonNull byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
 		for (byte b : bytes) {
 			int value = b & 0xFF;

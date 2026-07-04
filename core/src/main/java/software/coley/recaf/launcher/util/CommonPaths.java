@@ -2,8 +2,8 @@ package software.coley.recaf.launcher.util;
 
 import software.coley.recaf.launcher.info.PlatformType;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,7 +14,7 @@ public class CommonPaths {
 	/**
 	 * @return Recaf root directory.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getRecafDirectory() {
 		// Try environment variable first.
 		String recafDir = System.getenv("RECAF");
@@ -32,7 +32,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to Recaf's dependencies directory.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getDependenciesDir() {
 		return getRecafDirectory().resolve("dependencies");
 	}
@@ -40,7 +40,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to the Recaf launcher's directory for additional resource/config storage.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getLauncherDir() {
 		return getRecafDirectory().resolve("launcher");
 	}
@@ -48,7 +48,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to Recaf jar.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getRecafJar() {
 		return getRecafDirectory().resolve("recaf.jar");
 	}
@@ -56,7 +56,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to Recaf temporary jar used in the update process.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getRecafTempJar() {
 		return getRecafDirectory().resolve("recaf-update-tmp");
 	}
@@ -64,7 +64,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to cli launcher config.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getCliConfigFile() {
 		return getLauncherDir().resolve("config-cli.json");
 	}
@@ -72,7 +72,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to gui launcher config.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getGuiConfigFile() {
 		return getLauncherDir().resolve("config-gui.json");
 	}
@@ -80,7 +80,7 @@ public class CommonPaths {
 	/**
 	 * @return Path to file containing snapshot workflow file.
 	 */
-	@Nonnull
+	@NonNull
 	public static Path getSnapshotWorkflowFile() {
 		return getLauncherDir().resolve("installed-workflow-id.txt");
 	}

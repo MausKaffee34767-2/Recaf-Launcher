@@ -1,7 +1,7 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +19,7 @@ public class SymLinks {
 	 * @return Target path, or {@code null} if the path could not be resolved.
 	 */
 	@Nullable
-	public static Path resolveSymLink(@Nonnull Path path) {
+	public static Path resolveSymLink(@NonNull Path path) {
 		try {
 			int linkDepth = 0;
 			while (Files.isSymbolicLink(path)) {

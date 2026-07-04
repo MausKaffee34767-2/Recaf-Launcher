@@ -1,7 +1,7 @@
 package software.coley.recaf.launcher.task.error;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Exception outlining Recaf update failure cases.
@@ -19,7 +19,7 @@ public class InvalidInstallationException extends Exception {
 	 * @param message
 	 * 		Detail message.
 	 */
-	public InvalidInstallationException(int code, @Nonnull String message) {
+	public InvalidInstallationException(int code, @NonNull String message) {
 		this(code, message, null);
 	}
 
@@ -31,7 +31,7 @@ public class InvalidInstallationException extends Exception {
 	 * @param cause
 	 * 		Cause of the installation failure.
 	 */
-	public InvalidInstallationException(int code, @Nonnull String message, @Nullable Throwable cause) {
+	public InvalidInstallationException(int code, @NonNull String message, @Nullable Throwable cause) {
 		super(message, cause);
 		this.code = code;
 	}

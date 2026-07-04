@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.info;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.nio.file.Path;
 import java.util.Comparator;
 
@@ -31,7 +31,7 @@ public class JavaInstall {
 	 * @param version
 	 * 		Major version of the installation.
 	 */
-	public JavaInstall(@Nonnull Path javaExecutable, int version) {
+	public JavaInstall(@NonNull Path javaExecutable, int version) {
 		this.javaExecutable = javaExecutable;
 		this.version = version;
 	}
@@ -39,7 +39,7 @@ public class JavaInstall {
 	/**
 	 * @return Path to the Java executable.
 	 */
-	@Nonnull
+	@NonNull
 	public Path getJavaExecutable() {
 		return javaExecutable;
 	}

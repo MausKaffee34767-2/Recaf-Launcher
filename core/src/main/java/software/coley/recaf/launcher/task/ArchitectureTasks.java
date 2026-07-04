@@ -3,15 +3,16 @@ package software.coley.recaf.launcher.task;
 import software.coley.recaf.launcher.info.ArchitectureType;
 import software.coley.recaf.launcher.info.SystemInformation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Locale;
 
 public class ArchitectureTasks {
 	/**
 	 * @return Current architecture.
 	 */
-	@Nonnull
+	@NonNull
 	public static ArchitectureType get() {
 		return get(SystemInformation.OS_ARCH);
 	}
@@ -22,7 +23,7 @@ public class ArchitectureTasks {
 	 *
 	 * @return Architecture type.
 	 */
-	@Nonnull
+	@NonNull
 	public static ArchitectureType get(@Nullable String architecture) {
 		if (architecture == null)
 			return ArchitectureType.UNKNOWN;

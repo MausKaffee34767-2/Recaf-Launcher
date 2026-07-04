@@ -2,8 +2,8 @@ package software.coley.recaf.launcher.task;
 
 import software.coley.recaf.launcher.info.Version;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.util.Objects;
 
 /**
@@ -23,7 +23,7 @@ public class VersionUpdateResult {
 	 * @param type
 	 * 		Version update status type.
 	 */
-	public VersionUpdateResult(@Nullable Version from, @Nullable Version to, @Nonnull VersionUpdateStatusType type) {
+	public VersionUpdateResult(@Nullable Version from, @Nullable Version to, @NonNull VersionUpdateStatusType type) {
 		this.from = from;
 		this.to = to;
 		this.type = type;
@@ -57,7 +57,7 @@ public class VersionUpdateResult {
 	/**
 	 * @return Version update status type.
 	 */
-	@Nonnull
+	@NonNull
 	public VersionUpdateStatusType getType() {
 		return type;
 	}

@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 
 /**
@@ -21,6 +21,6 @@ public interface IOFunction<T, R> {
 	 * @throws IOException
 	 * 		When the function mapping fails.
 	 */
-	@Nonnull
-	R apply(@Nonnull T value) throws IOException;
+	@NonNull
+	R apply(@NonNull T value) throws IOException;
 }

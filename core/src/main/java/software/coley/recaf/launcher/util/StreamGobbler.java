@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,7 +19,7 @@ public class StreamGobbler implements Runnable {
 	 * @param lineConsumer
 	 * 		Consumer to handle text lines coming from the process.
 	 */
-	public StreamGobbler(@Nonnull InputStream input, @Nonnull Consumer<String> lineConsumer) {
+	public StreamGobbler(@NonNull InputStream input, @NonNull Consumer<String> lineConsumer) {
 		this.input = input;
 		this.lineConsumer = lineConsumer;
 	}

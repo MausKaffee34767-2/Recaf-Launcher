@@ -7,8 +7,8 @@ import software.coley.recaf.launcher.config.LaunchAction;
 import software.coley.recaf.launcher.info.JavaInstall;
 import software.coley.recaf.launcher.info.JavaVersion;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,7 +37,7 @@ public class FirstTimePanel extends BrowsableJavaVersionPanel {
 	private int cardIndex;
 	private String currentCard = CARD_WELCOME;
 
-	public FirstTimePanel(@Nonnull Runnable onFinish) {
+	public FirstTimePanel(@NonNull Runnable onFinish) {
 		initComponents();
 
 		this.onFinish = onFinish;
@@ -79,13 +79,13 @@ public class FirstTimePanel extends BrowsableJavaVersionPanel {
 		cardHolderPanel.add(CARD_INSTALLS, cardInstalls);
 	}
 
-	@Nonnull
+	@NonNull
 	@Override
 	protected JButton getBrowseButton() {
 		return browseInstallButton;
 	}
 
-	@Nonnull
+	@NonNull
 	@Override
 	protected JComboBox<JavaInstall> getInstallCombo() {
 		return installCombo;

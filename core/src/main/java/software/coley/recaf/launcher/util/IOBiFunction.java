@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 
 /**
@@ -25,6 +25,6 @@ public interface IOBiFunction<T1, T2, R> {
 	 * @throws IOException
 	 * 		When the function mapping fails.
 	 */
-	@Nonnull
-	R apply(@Nonnull T1 value1, @Nonnull T2 value2) throws IOException;
+	@NonNull
+	R apply(@NonNull T1 value1, @NonNull T2 value2) throws IOException;
 }

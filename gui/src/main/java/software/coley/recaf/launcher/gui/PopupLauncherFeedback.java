@@ -8,8 +8,8 @@ import software.coley.recaf.launcher.task.RecafTasks;
 import software.coley.recaf.launcher.util.StringUtil;
 import software.coley.recaf.launcher.util.TransferListener;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -36,7 +36,7 @@ public class PopupLauncherFeedback extends JDialog implements LauncherFeedback {
 	}
 
 	@Override
-	public void updateLaunchProgressMessage(@Nonnull String message) {
+	public void updateLaunchProgressMessage(@NonNull String message) {
 		feedbackLabel.setText(message);
 	}
 
@@ -45,13 +45,13 @@ public class PopupLauncherFeedback extends JDialog implements LauncherFeedback {
 		setVisible(false);
 	}
 
-	@Nonnull
+	@NonNull
 	@Override
 	public TransferListener provideJavaFxDownloadListener() {
 		return new ProgressBarTransferListener(RecafTasks.FALLBACK_RECAF_SIZE_BYTES, feedbackBar);
 	}
 
-	@Nonnull
+	@NonNull
 	@Override
 	public TransferListener provideRecafDownloadListener() {
 		return new ProgressBarTransferListener(RecafTasks.FALLBACK_RECAF_SIZE_BYTES, feedbackBar);

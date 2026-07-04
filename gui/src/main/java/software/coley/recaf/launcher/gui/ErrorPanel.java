@@ -5,7 +5,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import software.coley.recaf.launcher.task.ExecutionTasks;
 import software.coley.recaf.launcher.util.DesktopUtil;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,7 +32,7 @@ public class ErrorPanel extends JPanel {
 	/**
 	 * @param result Result to show contents of.
 	 */
-	public ErrorPanel(@Nonnull ExecutionTasks.RunResult result) {
+	public ErrorPanel(/* TODO: somehow use @NonNull here */ ExecutionTasks.RunResult result) {
 		initComponents();
 
 		descriptionLabel.setText(result.getCodeDescription());
@@ -80,7 +80,7 @@ public class ErrorPanel extends JPanel {
 		clipboard.setContents(stringSelection, null);
 	}
 
-	@Nonnull
+	@NonNull
 	private String export() {
 		return (descriptionLabel.getText() + "\n\n" + outText.getText() + "\n" + errText.getText()).trim();
 	}

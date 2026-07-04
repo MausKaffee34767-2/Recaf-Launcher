@@ -8,8 +8,8 @@ import software.coley.recaf.launcher.task.JavaEnvTasks;
 import software.coley.recaf.launcher.util.CommonPaths;
 import software.coley.recaf.launcher.util.Loggers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -85,7 +85,7 @@ public class Config {
 	/**
 	 * @return Shared config instance.
 	 */
-	@Nonnull
+	@NonNull
 	public static Config get() {
 		return INSTANCE;
 	}
@@ -107,7 +107,7 @@ public class Config {
 	/**
 	 * @return Configured action to take when running the launcher.
 	 */
-	@Nonnull
+	@NonNull
 	public LaunchAction getLaunchAction() {
 		return launchAction;
 	}
@@ -116,7 +116,7 @@ public class Config {
 	 * @param launchAction
 	 * 		Action to take when running the launcher.
 	 */
-	public void setLaunchAction(@Nonnull LaunchAction launchAction) {
+	public void setLaunchAction(@NonNull LaunchAction launchAction) {
 		this.launchAction = launchAction;
 		persist();
 	}
@@ -134,7 +134,7 @@ public class Config {
 	 * @param javaInstall
 	 * 		Target Java version to use when running Recaf.
 	 */
-	public void setLaunchJavaInstallation(@Nonnull JavaInstall javaInstall) {
+	public void setLaunchJavaInstallation(@NonNull JavaInstall javaInstall) {
 		this.javaInstall = javaInstall;
 		persist();
 	}

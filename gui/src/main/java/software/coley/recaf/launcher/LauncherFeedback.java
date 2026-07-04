@@ -3,8 +3,8 @@ package software.coley.recaf.launcher;
 import software.coley.recaf.launcher.task.ExecutionTasks;
 import software.coley.recaf.launcher.util.TransferListener;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Outline of UX feedback for launching.
@@ -33,7 +33,7 @@ public interface LauncherFeedback {
 	 * @param message
 	 * 		Message detailing current launcher state.
 	 */
-	default void updateLaunchProgressMessage(@Nonnull String message) {}
+	default void updateLaunchProgressMessage(@NonNull String message) {}
 
 	/**
 	 * Called to notify the feedback implementation the launcher is finished {@link ExecutionTasks#run(boolean, String)}.

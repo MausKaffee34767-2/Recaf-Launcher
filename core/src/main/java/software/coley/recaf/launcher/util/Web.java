@@ -1,7 +1,7 @@
 package software.coley.recaf.launcher.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,8 +27,8 @@ public class Web {
 	 * @throws IOException
 	 * 		When the content cannot be read.
 	 */
-	@Nonnull
-	public static String getText(@Nonnull String url) throws IOException {
+	@NonNull
+	public static String getText(@NonNull String url) throws IOException {
 		return mapContent(url, (connection, stream) -> toString(stream));
 	}
 
@@ -41,8 +41,8 @@ public class Web {
 	 * @throws IOException
 	 * 		When the content cannot be read.
 	 */
-	@Nonnull
-	public static byte[] getBytes(@Nonnull String url, @Nullable TransferListener listener) throws IOException {
+	@NonNull
+	public static byte[] getBytes(@NonNull String url, @Nullable TransferListener listener) throws IOException {
 		return mapContent(url, (connection, stream) -> {
 			int max = connection.getContentLength();
 			return Web.toBytes(stream, max, listener);
@@ -58,23 +58,23 @@ public class Web {
 	 * @throws IOException
 	 * 		When the content cannot be read.
 	 */
-	public static void consumeStream(@Nonnull String url, @Nonnull IOConsumer<InputStream> consumer) throws IOException {
+	public static void consumeStream(@NonNull String url, @NonNull IOConsumer<InputStream> consumer) throws IOException {
 		acceptContent(url, (connection, stream) -> consumer.accept(stream));
 	}
 
-	@Nonnull
-	private static <T> T mapContent(@Nonnull String url, @Nonnull IOBiFunction<URLConnection, InputStream, T> function) throws IOException {
+	@NonNull
+	private static <T> T mapContent(@NonNull String url, @NonNull IOBiFunction<URLConnection, InputStream, T> function) throws IOException {
 		URLConnection conn = openConnection(url);
 		return function.apply(conn, conn.getInputStream());
 	}
 
-	private static void acceptContent(@Nonnull String url, @Nonnull IOBiConsumer<URLConnection, InputStream> consumer) throws IOException {
+	private static void acceptContent(@NonNull String url, @NonNull IOBiConsumer<URLConnection, InputStream> consumer) throws IOException {
 		URLConnection conn = openConnection(url);
 		consumer.accept(conn, conn.getInputStream());
 	}
 
-	@Nonnull
-	private static URLConnection openConnection(@Nonnull String url) throws IOException {
+	@NonNull
+	private static URLConnection openConnection(@NonNull String url) throws IOException {
 		URL urlObject = new URL(url);
 		URLConnection conn = urlObject.openConnection();
 		conn.setRequestProperty("User-Agent", USER_AGENT);
@@ -87,15 +87,15 @@ public class Web {
 		return conn;
 	}
 
-	@Nonnull
-	private static byte[] toBytes(@Nonnull InputStream input, int max, @Nullable TransferListener listener) throws IOException {
+	@NonNull
+	private static byte[] toBytes(@NonNull InputStream input, int max, @Nullable TransferListener listener) throws IOException {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		Stream.transfer(65536, input, output, max, listener);
 		return output.toByteArray();
 	}
 
-	@Nonnull
-	private static String toString(@Nonnull InputStream input) throws IOException {
+	@NonNull
+	private static String toString(@NonNull InputStream input) throws IOException {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
 			String line;
 			StringBuilder builder = new StringBuilder();

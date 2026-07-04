@@ -5,8 +5,8 @@ import software.coley.recaf.launcher.info.JavaVersion;
 import software.coley.recaf.launcher.info.PlatformType;
 import software.coley.recaf.launcher.util.SymLinks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,7 +28,7 @@ public class JavaEnvTasks {
 	 *
 	 * @return Set of discovered Java installations.
 	 */
-	@Nonnull
+	@NonNull
 	public static Collection<JavaInstall> getJavaInstalls() {
 		return javaInstalls;
 	}
@@ -180,8 +180,8 @@ public class JavaEnvTasks {
 	 * @return {@code true} when the path was recognized as a valid executable.
 	 * {@code false} when discarded.
 	 */
-	@Nonnull
-	public static AdditionResult addJavaInstall(@Nonnull Path javaExecutable) {
+	@NonNull
+	public static AdditionResult addJavaInstall(@NonNull Path javaExecutable) {
 		return addJavaInstall(javaExecutable, executable -> {
 			// Most installs are structured like: /whatever/jvms/openjdk-21.0.3/bin/java.exe
 			// Thus, the parent of the bin directory has the name.
@@ -202,8 +202,8 @@ public class JavaEnvTasks {
 	 * @return {@code true} when the path was recognized as a valid executable.
 	 * {@code false} when discarded.
 	 */
-	@Nonnull
-	public static AdditionResult addJavaMacInstall(@Nonnull Path javaExecutable) {
+	@NonNull
+	public static AdditionResult addJavaMacInstall(@NonNull Path javaExecutable) {
 		return addJavaInstall(javaExecutable, executable -> {
 			// Mac structures things differently: /Library/Java/JavaVirtualMachines/openjdk-21.0.3.jdk/Contents/Home/bin/java.exe
 			// Thus, going up 4 directory levels will reveal the name.
@@ -232,8 +232,8 @@ public class JavaEnvTasks {
 	 * @return {@code true} when the path was recognized as a valid executable.
 	 * {@code false} when discarded.
 	 */
-	@Nonnull
-	public static AdditionResult addJavaInstall(@Nonnull Path javaExecutable, @Nonnull Function<Path, String> executableToJvmName) {
+	@NonNull
+	public static AdditionResult addJavaInstall(@NonNull Path javaExecutable, @NonNull Function<Path, String> executableToJvmName) {
 		// Resolve sym-links
 		if (Files.isSymbolicLink(javaExecutable)) {
 			javaExecutable = SymLinks.resolveSymLink(javaExecutable);
@@ -281,13 +281,13 @@ public class JavaEnvTasks {
 	 * @return Install entry for path, or {@code null} if not previously recorded as a valid installation.
 	 */
 	@Nullable
-	public static JavaInstall getByPath(@Nonnull Path path) {
+	public static JavaInstall getByPath(@NonNull Path path) {
 		return javaInstalls.stream()
 				.filter(i -> i.getJavaExecutable().equals(path))
 				.findFirst().orElse(null);
 	}
 
-	private static void addJavaInstall(@Nonnull JavaInstall install) {
+	private static void addJavaInstall(@NonNull JavaInstall install) {
 		javaInstalls.add(install);
 	}
 
@@ -304,7 +304,7 @@ public class JavaEnvTasks {
 			return this == SUCCESS;
 		}
 
-		@Nonnull
+		@NonNull
 		public String message() {
 			switch (this) {
 				case SUCCESS:

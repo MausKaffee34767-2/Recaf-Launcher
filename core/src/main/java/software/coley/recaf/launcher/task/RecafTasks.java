@@ -13,8 +13,8 @@ import software.coley.recaf.launcher.util.Stream;
 import software.coley.recaf.launcher.util.TransferListener;
 import software.coley.recaf.launcher.util.Web;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public class RecafTasks {
 	 * @throws InvalidInstallationException
 	 * 		When there is no valid-installed version of Recaf.
 	 */
-	@Nonnull
+	@NonNull
 	public static RecafVersion getInstalledVersion() throws InvalidInstallationException {
 		// Check if it exists.
 		Path recafJar = CommonPaths.getRecafJar();
@@ -120,7 +120,7 @@ public class RecafTasks {
 	/**
 	 * @return Result of attempting to update from the stable releases.
 	 */
-	@Nonnull
+	@NonNull
 	public static VersionUpdateResult updateFromStable() {
 		RecafVersion installedVersion;
 		try {
@@ -183,7 +183,7 @@ public class RecafTasks {
 	 *
 	 * @return Result of attempting to update from the snapshot releases.
 	 */
-	@Nonnull
+	@NonNull
 	public static VersionUpdateResult updateFromSnapshot(@Nullable String branch) {
 		return updateFromSnapshot(name -> branch == null || branch.equalsIgnoreCase(name));
 	}
@@ -199,7 +199,7 @@ public class RecafTasks {
 	 *
 	 * @return Result of attempting to update from the snapshot releases.
 	 */
-	@Nonnull
+	@NonNull
 	public static VersionUpdateResult updateFromSnapshot(@Nullable Predicate<String> branchMatcher) {
 		RecafVersion installedVersion;
 		try {

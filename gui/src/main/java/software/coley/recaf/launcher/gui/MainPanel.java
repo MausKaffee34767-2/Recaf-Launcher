@@ -16,8 +16,9 @@ import software.coley.recaf.launcher.util.CommonPaths;
 import software.coley.recaf.launcher.util.ResettableDelayTask;
 import software.coley.recaf.launcher.util.TransferListener;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -55,7 +56,7 @@ public class MainPanel extends BrowsableJavaVersionPanel {
 	 * @param frame
 	 * 		Parent frame this panel belongs to.
 	 */
-	public MainPanel(@Nonnull JFrame frame) {
+	public MainPanel(@NonNull JFrame frame) {
 		this.frame = frame;
 
 		initComponents();
@@ -189,13 +190,13 @@ public class MainPanel extends BrowsableJavaVersionPanel {
 		return installs.iterator().next();
 	}
 
-	@Nonnull
+	@NonNull
 	@Override
 	protected JButton getBrowseButton() {
 		return browseInstallButton;
 	}
 
-	@Nonnull
+	@NonNull
 	@Override
 	protected JComboBox<JavaInstall> getInstallCombo() {
 		return installCombo;
@@ -292,24 +293,24 @@ public class MainPanel extends BrowsableJavaVersionPanel {
 	private class FeedbackImpl implements LauncherFeedback {
 		private final Container container;
 
-		public FeedbackImpl(@Nonnull Container container) {
+		public FeedbackImpl(@NonNull Container container) {
 			this.container = container;
 		}
 
-		@Nonnull
+		@NonNull
 		@Override
 		public TransferListener provideJavaFxDownloadListener() {
 			return new ProgressBarTransferListener(JavaFxTasks.FALLBACK_FX_SIZE_BYTES, javafxVersionProgress);
 		}
 
-		@Nonnull
+		@NonNull
 		@Override
 		public TransferListener provideRecafDownloadListener() {
 			return new ProgressBarTransferListener(RecafTasks.FALLBACK_RECAF_SIZE_BYTES, recafVersionProgress);
 		}
 
 		@Override
-		public void updateLaunchProgressMessage(@Nonnull String message) {
+		public void updateLaunchProgressMessage(@NonNull String message) {
 			feedbackLabel.setText(message);
 		}
 

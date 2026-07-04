@@ -15,8 +15,8 @@ import software.coley.recaf.launcher.util.Loggers;
 import software.coley.recaf.launcher.util.TransferListener;
 import software.coley.recaf.launcher.util.Web;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +67,7 @@ public class JavaFxTasks {
 	/**
 	 * @return Detected supported platform for the current system.
 	 */
-	@Nonnull
+	@NonNull
 	public static JavaFxPlatform detectSystemPlatform() {
 		switch (PlatformType.get()) {
 			case WINDOWS:
@@ -203,7 +203,7 @@ public class JavaFxTasks {
 	 * @return Extracted version based on file name pattern.
 	 */
 	@Nullable
-	private static JavaFxVersion mapToVersion(@Nonnull Path javafxDependency) {
+	private static JavaFxVersion mapToVersion(@NonNull Path javafxDependency) {
 		JavaFxPlatform platform = detectSystemPlatform();
 		String name = javafxDependency.getFileName().toString();
 		String[] prefixes = {
@@ -355,7 +355,7 @@ public class JavaFxTasks {
 	 * @param force
 	 *        {@code true} to re-download the version even if a local one exists.
 	 */
-	public static void updateTo(@Nonnull JavaFxVersion version, boolean force) {
+	public static void updateTo(@NonNull JavaFxVersion version, boolean force) {
 		JavaFxPlatform platform = detectSystemPlatform();
 		if (platform == JavaFxPlatform.UNSUPPORTED) {
 			logger.warn("Could not detect a supported version of JavaFX to use for this system:\n"

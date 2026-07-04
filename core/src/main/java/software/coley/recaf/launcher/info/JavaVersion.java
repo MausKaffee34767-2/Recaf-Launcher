@@ -1,6 +1,6 @@
 package software.coley.recaf.launcher.info;
 
-import javax.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,7 +36,7 @@ public class JavaVersion {
 	 *
 	 * @return Version if parsable, otherwise {@link #UNKNOWN_VERSION}.
 	 */
-	public static int fromVersionString(@Nonnull String version) {
+	public static int fromVersionString(@NonNull String version) {
 		try {
 			Matcher matcher = JAVA_VERSION_EXTRACTOR.matcher(version);
 			if (matcher.find())

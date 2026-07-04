@@ -3,8 +3,8 @@ package software.coley.recaf.launcher.task;
 import software.coley.recaf.launcher.info.JavaFxVersion;
 import software.coley.recaf.launcher.info.JavaVersion;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.function.Supplier;
 
@@ -20,7 +20,7 @@ public class CompatibilityTasks {
 	 *
 	 * @return Set of potential compatibility problems for the given environment.
 	 */
-	@Nonnull
+	@NonNull
 	public static EnumSet<CompatibilityProblem> getCompatibilityProblems(int javaVersion,
 	                                                                     @Nullable JavaFxVersion fxVersion) {
 		EnumSet<CompatibilityProblem> set = EnumSet.noneOf(CompatibilityProblem.class);
@@ -59,7 +59,7 @@ public class CompatibilityTasks {
 	 * @return Set of potential compatibility problems if
 	 * Recaf were to be launched with the current runtime contents.
 	 */
-	@Nonnull
+	@NonNull
 	public static EnumSet<CompatibilityProblem> getRuntimeCompatibilityProblems() {
 		EnumSet<CompatibilityProblem> set = EnumSet.noneOf(CompatibilityProblem.class);
 
@@ -90,11 +90,11 @@ public class CompatibilityTasks {
 
 		private final Supplier<String> message;
 
-		CompatibilityProblem(@Nonnull Supplier<String> message) {
+		CompatibilityProblem(@NonNull Supplier<String> message) {
 			this.message = message;
 		}
 
-		@Nonnull
+		@NonNull
 		public String getMessage() {
 			return message.get();
 		}
