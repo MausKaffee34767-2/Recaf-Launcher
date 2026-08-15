@@ -32,7 +32,7 @@ public class ErrorPanel extends JPanel {
 	/**
 	 * @param result Result to show contents of.
 	 */
-	public ErrorPanel(/* TODO: somehow use @NonNull here */ ExecutionTasks.RunResult result) {
+	public ErrorPanel(ExecutionTasks.@NonNull RunResult result) {
 		initComponents();
 
 		descriptionLabel.setText(result.getCodeDescription());
